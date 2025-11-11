@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iguaçu Solar</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="style.css">
+    <script src="include.js" defer></script>
+    <script src="app.js" defer></script>
+</head>
+
+<body>
+    <div data-include="partials/header.html"></div>
+
+    <main class="wrap grid cards-2">
+        <article class="card">
+            <h3>Criar conta</h3>
+            <form id="cadastroForm" class="grid" style="gap:10px">
+                <label>Nome completo<br>
+                    <input required id="fNome" placeholder="Digite seu nome">
+                </label>
+                <label>E-mail<br>
+                    <input required id="fEmail" type="email" placeholder="seuemail@email.com">
+                </label>
+                <label>Senha (mín. 6 caracteres)<br>
+                    <div style="display:flex;gap:8px;align-items:center">
+                        <input required id="fSenha" type="password" minlength="6" style="flex:1">
+                        <button class="btn" type="button" id="verSenha">Mostrar senha</button>
+                    </div>
+                </label>
+                <label>
+                    <input type="checkbox" id="fAceita" required>
+                    Eu li e aceito a <a href="privacidade.html" target="_blank">Política de Privacidade</a>.
+                </label>
+                <button class="btn" id="btnCadastrar">Cadastrar</button>
+                <div id="msg" class="muted" style="font-size:13px"></div>
+            </form>
+        </article>
+
+        <article class="card">
+            <h3>Usuários cadastrados (Apenas Demonstrativo)</h3>
+            <div style="overflow-x:auto">
+                <table class="table" id="usuariosTabela">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>E-mail</th>
+                            <th>Criado em</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </article>
+    </main>
+
+    <div data-include="partials/footer.html"></div>
+</body>
+
+</html>

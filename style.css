@@ -1,0 +1,460 @@
+:root {
+    --bg: #fffdf7;
+    --surface: #ffffff;
+    --text: #111827;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+    --primary: #0f172a;
+    --ring: rgba(15, 23, 42, .15);
+}
+
+.dark {
+    --bg: #0a0a0a;
+    --surface: #0f0f10;
+    --text: #f4f4f5;
+    --muted: #a1a1aa;
+    --border: #27272a;
+    --primary: #ffffff;
+    --ring: rgba(255, 255, 255, .20);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font: 16px/1.5 system-ui, Segoe UI, Roboto, Arial;
+    background: linear-gradient(to bottom, var(--bg), var(--surface));
+    color: var(--text);
+}
+
+/*Navs e Headers*/
+.wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 16px;
+}
+
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: color-mix(in oklab, var(--surface) 85%, transparent);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--border);
+}
+
+.brand {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+}
+
+.brand small {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.logo-img {
+    height: 48px;
+    width: auto;
+    border-radius: 8px;
+    margin-right: 10px;
+    object-fit: contain;
+}
+
+.nav {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+
+.nav a {
+    padding: 8px 14px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.nav a[aria-current="page"] {
+    background: var(--primary);
+    color: var(--surface);
+}
+
+#darkToggle {
+    background: color-mix(in oklab, var(--surface) 80%, transparent);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background .2s, transform .2s;
+    border: none;
+    cursor: pointer;
+}
+
+#darkToggle:hover {
+    transform: scale(1.08);
+    background: color-mix(in oklab, var(--border) 50%, transparent);
+}
+
+/*Grids e Cards */
+main {
+    padding: 24px 0;
+}
+
+.grid {
+    display: grid;
+    gap: 16px;
+}
+
+.cards-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.cards-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width:960px) {
+
+    .cards-2,
+    .cards-3 {
+        grid-template-columns: 1fr;
+    }
+}
+
+.card {
+    background: color-mix(in oklab, var(--surface) 92%, transparent);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 18px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .05);
+}
+
+.card h2,
+.card h3 {
+    margin: 0 0 8px 0;
+}
+
+.pill {
+    display: inline-block;
+    font-size: 12px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 4px 10px;
+    color: var(--text);
+}
+
+.muted {
+    color: var(--muted);
+}
+
+.btn {
+    border: 1px solid var(--border);
+    background: transparent;
+    padding: 8px 12px;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.btn:focus {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+}
+
+.dark .btn {
+    color: rgba(255, 255, 255, .92);
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th,
+.table td {
+    padding: 10px;
+    border-top: 1px solid var(--border);
+    text-align: left;
+}
+
+.table thead th {
+    background: color-mix(in oklab, var(--surface) 85%, transparent);
+}
+
+.video-wrapper {
+    aspect-ratio: 16/9;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.video-wrapper iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+
+.hero {
+    position: relative;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    color: var(--text);
+    padding-top: 16vh;
+    padding-bottom: 40vh;
+}
+
+.hero::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: url("img/bg-solar.jpg") center/cover no-repeat;
+    filter: brightness(.95);
+    z-index: -2;
+}
+
+.hero::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(to bottom,
+            rgba(255, 255, 255, .75),
+            rgba(255, 255, 255, .92));
+    z-index: -1;
+}
+
+.hero .card {
+    background: rgba(255, 255, 255, .85);
+    border-radius: 24px;
+    padding: 40px;
+    max-width: 1200px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .15);
+    backdrop-filter: blur(6px);
+}
+
+.hero h2 {
+    font-size: 2rem;
+    margin-bottom: 12px;
+}
+
+.hero p {
+    font-size: 1.1rem;
+    color: var(--muted);
+}
+
+.dark .hero::before {
+    filter: brightness(.6) contrast(1.1);
+}
+
+.dark .hero::after {
+    background: linear-gradient(to bottom, rgba(20, 20, 20, .7), rgba(10, 10, 10, .85));
+}
+
+.dark .hero .card {
+    background: rgba(30, 30, 30, .80);
+    color: var(--text);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .6);
+}
+
+#calcSolar {
+    position: relative;
+    margin-top: -28vh;
+    z-index: 5;
+    background: rgba(255, 255, 255, .90);
+    backdrop-filter: blur(8px);
+    border-radius: 24px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, .15);
+    padding: 32px;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.dark #calcSolar {
+    background: rgba(15, 15, 15, .80);
+}
+
+.field label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    font-weight: 600;
+}
+
+.help {
+    border: 1px solid var(--border);
+    background: color-mix(in oklab, var(--surface) 90%, transparent);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: inline-grid;
+    place-items: center;
+    font: 600 12px/1 system-ui;
+    cursor: pointer;
+    position: relative;
+}
+
+.help::before {
+    content: "i";
+}
+
+.dark .help::before {
+    content: "i";
+    color: rgba(255, 255, 255, .92);
+}
+
+.help[data-tip]:hover::after,
+.help[data-tip]:focus-visible::after {
+    content: attr(data-tip);
+    position: absolute;
+    left: 50%;
+    top: calc(100% + 8px);
+    transform: translateX(-50%);
+    min-width: 220px;
+    max-width: 260px;
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border);
+    padding: 10px 12px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .12);
+    font-size: 12px;
+    z-index: 50;
+}
+
+input,
+select {
+    width: 100%;
+    border: 1px solid var(--border);
+    background: color-mix(in oklab, var(--surface) 92%, transparent);
+    color: var(--text);
+    border-radius: 12px;
+    padding: 10px 12px;
+    outline: none;
+}
+
+input:focus,
+select:focus {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+}
+
+.card hr {
+    opacity: .6;
+}
+
+/*Para o Mobile*/
+@media (max-width:960px) {
+    .hero {
+        padding-top: 12vh;
+        padding-bottom: 24vh;
+    }
+
+    #calcSolar {
+        margin-top: -16vh;
+    }
+}
+
+/*Carrossel dos vídeos*/
+.carousel3 {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 12px;
+}
+
+.carousel3 .track {
+    display: grid;
+    gap: 16px;
+    align-items: start;
+    grid-template-columns: 1fr 1.05fr 1fr;
+}
+
+.carousel3 .pane .title {
+    margin: 6px 2px 0;
+}
+
+.carousel3 .pane {
+    transform: scale(.95);
+    opacity: .75;
+    transition: transform .25s ease, opacity .25s ease, box-shadow .25s ease;
+}
+
+.carousel3 .pane.center {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.carousel3 .pane.center .video-wrapper {
+    box-shadow: 0 20px 50px rgba(0, 0, 0, .12);
+}
+
+.carousel3 .nav {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: color-mix(in oklab, var(--surface) 85%, transparent);
+    cursor: pointer;
+    font-size: 26px;
+    line-height: 1;
+    display: grid;
+    place-items: center;
+    transition: transform .15s, background .15s;
+}
+
+.carousel3 .nav:hover {
+    transform: scale(1.05);
+}
+
+.dark .carousel3 .nav {
+    color: rgba(255, 255, 255, .92);
+}
+
+/*Para o mobile*/
+@media (max-width:800px) {
+    .carousel3 .track {
+        grid-template-columns: 1fr;
+    }
+
+    .carousel3 .pane.left,
+    .carousel3 .pane.right {
+        display: none;
+    }
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    width: auto !important;
+    height: auto !important;
+    accent-color: var(--primary);
+    cursor: pointer;
+    margin-right: 6px;
+    vertical-align: middle;
+}
+
+.site-footer {
+    border-top: 1px solid var(--border);
+    margin-top: 24px;
+}

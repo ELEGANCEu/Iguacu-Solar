@@ -1,11 +1,139 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Iguaçu Solar</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="style.css">
+    <script src="include.js" defer></script>
+    <script src="app.js" defer></script>
 </head>
+
 <body>
-    
+
+    <div data-include="partials/header.html"></div>
+    <main class="wrap">
+        <section class="hero">
+            <article class="card">
+                <h2>Bem-vindo(a) ao Iguaçu Solar</h2>
+                <p>Plataforma educativa para a população de Nova Iguaçu aprender sobre energia solar de forma simples,
+                    grátis e segura.</p>
+            </article>
+        </section>
+
+        <section class="wrap" aria-label="Calculadora Solar">
+            <article class="card" id="calcSolar">
+                <h2>Calculadora Solar</h2>
+
+                <div class="grid cards-2" style="align-items:start">
+                    <div class="card" style="margin:0">
+                        <form id="calcForm" class="grid" style="gap:12px">
+
+                            <div class="field">
+                                <label>CEP
+                                    <button class="help" type="button"
+                                        data-tip="Usamos o CEP para estimar seu estado (UF) e aplicar uma HSP padrão da região. Você pode ajustar depois."></button>
+                                </label>
+                                <input id="fCEP" inputmode="numeric" pattern="\d*" placeholder="ex.: 26022305">
+                                <small class="muted">UF: <strong id="ufLabel">—</strong></small>
+                            </div>
+
+                            <div class="field">
+                                <label>Companhia de energia
+                                    <button class="help" type="button"
+                                        data-tip="Ajustamos automaticamente a tarifa estimada de acordo com a companhia de energia da sua região. Você pode editar o valor de tarifa abaixo."></button>
+                                </label>
+                                <select id="fCompanhia"></select>
+                            </div>
+
+                            <div class="field">
+                                <label>Valor da conta de luz (R$)
+                                    <button class="help" type="button"
+                                        data-tip="Informe o total da sua última fatura. A calculadora estima o consumo a partir desse valor."></button>
+                                </label>
+                                <input id="fConta" type="number" min="0" step="0.01" placeholder="ex.: 250,12">
+                            </div>
+
+                            <div class="field">
+                                <label>Tarifa (R$/kWh)
+                                    <button class="help" type="button"
+                                        data-tip="Tarifa média residencial de acordo com a companhia da sua região."></button>
+                                </label>
+                                <input id="fTarifa" type="number" min="0.5" step="0.01" value="1.20">
+                            </div>
+
+                            <div class="field">
+                                <label>HSP (h/dia)
+                                    <button class="help" type="button"
+                                        data-tip="Hora de Sol Pleno: média diária de irradiação. Preenchemos pelo seu estado, mas você pode ajustar."></button>
+                                </label>
+                                <input id="fHsp" type="number" min="3" max="6" step="0.1" value="4.8">
+                            </div>
+
+                            <div class="field">
+                                <label>Potência do módulo (W)
+                                    <button class="help" type="button"
+                                        data-tip="Potência nominal do painel solar. Usaremos como base uma painel que produz 330W "></button>
+                                </label>
+                                <input id="fWp" type="number" min="330" max="700" step="5" value="330">
+                            </div>
+
+                            <div class="field">
+                                <label>Meta de compensação (%)
+                                    <button class="help" type="button"
+                                        data-tip="Percentual de quanto você quer compensar com energia solar."></button>
+                                </label>
+                                <input id="fMeta" type="number" min="40" max="100" step="5" value="45">
+                            </div>
+
+                            <div class="field">
+                                <label>Desempenho do sistema (PR)
+                                    <button class="help" type="button" data-tip="Rendimento global (perdas)."></button>
+                                </label>
+                                <input id="fPR" type="number" min="0.6" max="0.9" step="0.01" value="0.78">
+                            </div>
+
+                            <button class="btn" type="submit">Simular</button>
+                        </form>
+                    </div>
+
+                    <div class="card" style="margin:0">
+                        <h3 style="margin-top:0">Resumo</h3>
+
+                        <div class="grid" style="gap:8px">
+                            <div class="pill">Produção mensal estimada: <strong id="rProdMensal">-</strong> kWh/mês
+                            </div>
+                            <div class="pill">Economia anual: <strong id="rEconAnual">-</strong></div>
+                            <div class="pill">Retorno do Investimento(estimativa): <strong id="rPayback">-</strong>
+                                meses</div>
+                        </div>
+
+                        <hr style="border:none;height:1px;background:var(--border);margin:14px 0">
+
+                        <div class="grid cards-2" style="gap:8px">
+                            <div class="pill">Área necessária: <strong id="rArea">-</strong> m²</div>
+                            <div class="pill">Potência do kit: <strong id="rKwp">-</strong> kWp</div>
+                            <div class="pill">Qtd. de módulos(Paineis Solares): <strong id="rMod">-</strong></div>
+                            <div class="pill">Consumo estimado: <strong id="rConsumo">-</strong> kWh/mês</div>
+                        </div>
+
+                        <hr style="border:none;height:1px;background:var(--border);margin:14px 0">
+
+                        <h4>Valor estimado</h4>
+                        <div class="grid cards-2" style="gap:8px">
+                            <div class="pill">Menor: <strong id="rPrecoMin">–</strong></div>
+                            <div class="pill">Maior: <strong id="rPrecoMax">–</strong></div>
+                        </div>
+
+                    </div>
+                </div>
+            </article>
+        </section>
+    </main>
+    <div data-include="partials/footer.html"></div>
 </body>
+
 </html>

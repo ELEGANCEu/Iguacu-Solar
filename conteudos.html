@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iguaçu Solar</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="style.css">
+    <script src="include.js" defer></script>
+    <script src="app.js" defer></script>
+</head>
+
+<body>
+    <div data-include="partials/header.html"></div>
+
+    <main class="wrap">
+        <h1>Conteúdos Educativos</h1>
+
+        <section class="grid cards-2" aria-label="Conteúdos educativos">
+            <article class="card">
+                <h2>Introdução a Energia Solar</h2>
+                <p class="muted">
+                    Conceitos essenciais e tudo que você precisa saber para iniciar no uso de energia solar.
+                </p>
+                <ul>
+                    <li>O que é um sistema fotovoltaico e como funciona.</li>
+                    <li>Diferenças entre sistemas isolados.</li>
+                    <li>Hora de Sol Pleno (HSP).</li>
+                    <li>Tipos de células e eficiências.</li>
+                </ul>
+                <p>
+                    <a class="btn" href="docs/introducao.pdf" target="_blank" rel="noopener">
+                        Baixar PDF
+                    </a>
+                </p>
+                <p class="muted" style="font-size:13px;line-height:1.5;">
+                    Fonte: Blue Sol Energia Solar, <em>Introdução a Sistemas de Energia Solar Fotovoltaica</em>.
+                </p>
+            </article>
+
+            <article class="card">
+                <h2>Dimensionamento Fotovoltaico</h2>
+                <p class="muted">
+                    Passo a passo para estimar potência instalada, número de módulos e inversor.
+                </p>
+                <ul>
+                    <li>Consumo mensal médio (kWh).</li>
+                    <li>Irradiação média local / HSP.</li>
+                    <li>Objetivo de compensação.</li>
+                    <li>Potência dos módulos e inversor compatível.</li>
+                </ul>
+
+                <p>
+                    <a class="btn" href="docs/dimensionamento-raylla.pdf" target="_blank" rel="noopener">
+                        Baixar PDF
+                    </a>
+                </p>
+                <p class="muted" style="font-size:13px;line-height:1.5;">
+                    Fonte: Ribeiro, R. P. (2016). <em>Estudo de Caso: Dimensionamento de um Sistema Fotovoltaico
+                        Residencial</em>, CEFET-MG.
+                </p>
+            </article>
+        </section>
+    </main>
+
+    <div data-include="partials/footer.html"></div>
+</body>
+
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iguaçu Solar</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="style.css">
+    <script src="include.js" defer></script>
+    <script src="app.js" defer></script>
+</head>
+
+<body>
+    <div data-include="partials/header.html"></div>
+
+    <main class="wrap">
+        <section class="card" aria-label="Carrossel de vídeos">
+            <h2>Vídeos</h2>
+
+            <div class="carousel3" id="videosCarousel3">
+                <button class="nav prev" aria-label="Vídeo anterior">‹</button>
+
+                <div class="track" aria-live="polite">
+                    <article class="pane left">
+                        <div class="video-wrapper">
+                            <iframe id="vidL" src="" title="Vídeo educativo (anterior)" allowfullscreen></iframe>
+                        </div>
+                        <p class="title muted" id="titleL"></p>
+                    </article>
+
+                    <article class="pane center">
+                        <div class="video-wrapper focus">
+                            <iframe id="vidC" src="" title="Vídeo educativo (atual)" allowfullscreen></iframe>
+                        </div>
+                        <h3 class="title" id="titleC"></h3>
+                        <p class="muted" id="sourceC"></p>
+                    </article>
+
+                    <article class="pane right">
+                        <div class="video-wrapper">
+                            <iframe id="vidR" src="" title="Vídeo educativo (próximo)" allowfullscreen></iframe>
+                        </div>
+                        <p class="title muted" id="titleR"></p>
+                    </article>
+                </div>
+
+                <button class="nav next" aria-label="Próximo vídeo">›</button>
+            </div>
+        </section>
+        <div data-include="partials/footer.html"></div>
+        <script>
+            const VIDEOS_YT = [
+                { title: "Dimensionamento FV", url: "https://www.youtube.com/watch?v=i5NG_wHAodk", source: "Fotaic Energia Solar" },
+                { title: "Funcionamento do Painel Solar", url: "hhttps://www.youtube.com/embed/gi6xMlYK7Og?si=ipjWzX28NtosYoDo", source: "Engenharia Detalhada" },
+                { title: "Horas de Sol Pleno(HSP)", url: "https://www.youtube.com/embed/lYygkT421EQ?si=47CYZK1TaVWNIdhR", source: "MA Energia Solar" },
+                { title: "Inversor Solar", url: "https://www.youtube.com/embed/MhV_Lq446Uk?si=rAZXv5BghhFW1wtY", source: "E4 Energias Renováveis" },
+                { title: "Energia Solar com Segurança", url: "https://www.youtube.com/embed/S1-_lUTolIw?si=3mch_JfI1Ktb1EW9", source: "energiasolarmaster" }
+            ].slice(0, 5);
+
+            function ytIdFromURL(u) {
+                try {
+                    const url = new URL(u);
+                    if (url.hostname.includes('youtu.be')) return url.pathname.slice(1);
+                    if (url.searchParams.get('v')) return url.searchParams.get('v');
+                    const parts = url.pathname.split('/'); const i = parts.indexOf('embed');
+                    if (i >= 0 && parts[i + 1]) return parts[i + 1];
+                } catch { }
+                return u;
+            }
+
+            (function initCarousel3() {
+                const wrap = document.getElementById('videosCarousel3');
+                if (!wrap || !VIDEOS_YT.length) return;
+
+                const items = VIDEOS_YT.map(v => ({ ...v, id: ytIdFromURL(v.url) }));
+                let i = 0;
+
+                const el = {
+                    vidL: document.getElementById('vidL'),
+                    vidC: document.getElementById('vidC'),
+                    vidR: document.getElementById('vidR'),
+                    titleL: document.getElementById('titleL'),
+                    titleC: document.getElementById('titleC'),
+                    titleR: document.getElementById('titleR'),
+                    sourceC: document.getElementById('sourceC'),
+                };
+
+                function embed(id) { return `https://www.youtube.com/embed/${id}?rel=0&modestbranding=1`; }
+                const at = (k, off = 0) => items[(k + off + items.length) % items.length];
+
+                function render() {
+                    const L = at(i, -1), C = at(i, 0), R = at(i, +1);
+
+                    if (el.vidL.src !== embed(L.id)) el.vidL.src = embed(L.id);
+                    if (el.vidC.src !== embed(C.id)) el.vidC.src = embed(C.id);
+                    if (el.vidR.src !== embed(R.id)) el.vidR.src = embed(R.id);
+
+                    el.titleL.textContent = L.title;
+                    el.titleC.textContent = C.title;
+                    el.titleR.textContent = R.title;
+                    el.sourceC.textContent = `Fonte: ${C.source || "YouTube"}`;
+                }
+
+                wrap.querySelector('.prev').addEventListener('click', () => { i = (i - 1 + items.length) % items.length; render(); });
+                wrap.querySelector('.next').addEventListener('click', () => { i = (i + 1) % items.length; render(); });
+
+                window.addEventListener('keydown', (e) => {
+                    if (e.key === 'ArrowLeft') { i = (i - 1 + items.length) % items.length; render(); }
+                    if (e.key === 'ArrowRight') { i = (i + 1) % items.length; render(); }
+                });
+
+                render();
+            })();
+        </script>
+    </main>
+</body>
+
+</html>
