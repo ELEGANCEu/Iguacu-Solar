@@ -458,3 +458,18 @@ input[type="radio"] {
     border-top: 1px solid var(--border);
     margin-top: 24px;
 }
+
+/*Imagem Desenvolvedor*/
+.dev-foto {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--border);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .1);
+    transition: transform .2s;
+}
+
+.dev-foto:hover {
+    transform: scale(1.1);
+}
